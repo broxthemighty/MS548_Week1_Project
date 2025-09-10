@@ -1,11 +1,9 @@
 #File main.py
-
 #needs to use tkinter
 import tkinter as tk
 #imports from tkinter
 from tkinter import messagebox
 from tkinter import simpledialog
-
 """ 
 four things: 
 Learning Goals
@@ -57,21 +55,21 @@ class App:
         #use pack  to make the button visible, fill horizontal space, and add vertical padding
         self.info_button.pack(fill=tk.X, pady=5)
 
-        #method to show the info message box
-        def show_info_message(self):
-            #informational message box
-            messagebox.showinfo(
-                #title of the message box window
-                "This is some info",
-                #message content
-                "This is more info shown to the user.\nIt is very important"
-                )
+    #method to show the info message box
+    def show_info_message(self):
+        #informational message box
+        messagebox.showinfo(
+            #title of the message box window
+            "This is some info",
+            #message content
+            "This is more info shown to the user.\nIt is very important"
+            )
     
-    #python construct to check if script is being run directly
-    if __name__== "__main__":
-        #main tkinter window object
-        root_window = tk.Tk()
-        #instance of the App class, passing main window to it
-        app_instance = App(root_window)
-        #Tkinter event loop, listening for events and keep the GUI running
-        root_window.mainloop
+#python construct to check if script is being run directly
+if __name__== "__main__":
+    #main tkinter window object
+    root_window = tk.Tk()
+    #instance of the App class, passing main window to it
+    app_instance = App(root_window)
+    #Tkinter event loop, listening for events and keep the GUI running
+    root_window.mainloop()
