@@ -3,7 +3,7 @@
 """
 Learnflow Base - Personal Learning Tracker
 Author: Matt Lindborg
-Course: MS5548 - Advanced Programming Concepts and Ai
+Course: MS548 - Advanced Programming Concepts and Ai
 Assignment: Week 1 Python GUI
 Date: 9/13/2025
 
