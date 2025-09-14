@@ -183,9 +183,30 @@ class App:
     # custom popup input window
     def custom_input(self, title, prompt):
         # create a popup window
-        popup = tk.Toplevel(self.root) # new frame from parent frame
-        popup.title(title) # title text
-        popup.geometry("300x150")  # set popup size
+
+        popup = tk.Toplevel(self.root)
+        popup.title(title)
+
+         # desired popup size
+        popup_width = 300
+        popup_height = 150
+
+        # make sure root window geometry info is current
+        self.root.update_idletasks()
+
+        # get main window position and size
+        main_x = self.root.winfo_x()
+        main_y = self.root.winfo_y()
+        main_width = self.root.winfo_width()
+        main_height = self.root.winfo_height()
+
+        # calculate popup position:
+        # centered horizontally, quarter way down vertically
+        pos_x = main_x + (main_width // 2) - (popup_width // 2)
+        pos_y = main_y + (main_height // 4) - (popup_height // 2)
+
+        # apply popup geometry
+        popup.geometry(f"{popup_width}x{popup_height}+{pos_x}+{pos_y}")
 
         # label for prompt
         label = tk.Label(
@@ -202,11 +223,14 @@ class App:
             )
         entry.pack(pady=5)      # display field
 
+        # focus cursor immediately
+        entry.focus_set()
+
         # variable to store result
         result = {"value": None}
 
         # function when OK is pressed
-        def on_ok():
+        def on_ok(event=None):
             result["value"] = entry.get() # get the text entry
             popup.destroy()  # close popup
 
@@ -217,6 +241,9 @@ class App:
             command=on_ok   # on click action
             ) 
         ok_button.pack(pady=10) # display button
+
+        # bind Enter key for convenience
+        popup.bind("<Return>", on_ok)
 
         # wait until popup is closed
         self.root.wait_window(popup)
@@ -258,6 +285,8 @@ class App:
             # update the text box display
             self.update_output()             
     
+""" MAIN PROGRAM LOOP """
+
 # python construct to check if script is being run directly
 if __name__== "__main__":
     #create the main tkinter window object
