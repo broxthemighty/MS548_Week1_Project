@@ -17,10 +17,9 @@ application purposeful, not just a GUI demo, and helps users maintain
 structure in their ongoing education.
 """
 
-import tkinter as tk
 #imports from tkinter
+import tkinter as tk
 from tkinter import messagebox
-from tkinter import simpledialog
 
 class App:
     
@@ -50,7 +49,7 @@ class App:
         """ ----------------- TOP ROW: LABEL + EXIT BUTTON ----------------- """
         
         # frame that will hold both the welcome label (left) and the exit button (right)
-        top_frame = tk.Frame(main_frame)
+        top_frame = tk.Frame(main_frame)                # new frame from parent frame
         top_frame.grid(row=0, column=0, sticky="ew")    # expand horizontally
         
         # make first column of top_frame stretch
@@ -71,7 +70,7 @@ class App:
         self.quit_button = tk.Button(
             top_frame,          # parent frame
             text="Exit",        # text shown on button
-            width=6,            # button width in characters
+            width=6,            # button width
             command=self.root.quit  # action: close the app
         )
         # place exit button on right side of same row
@@ -81,7 +80,7 @@ class App:
         self.clear_button = tk.Button(
             top_frame,          # parent frame
             text="Clear",       # text shown on button
-            width=7,            # button width in characters
+            width=7,            # button width
             command=self.clear_entries  # action: clear data entries
         )
         # place clear button before exit button on same row
@@ -90,67 +89,67 @@ class App:
         """ ----------------- MIDDLE ROW: BUTTONS + IMAGE ----------------- """
         
         # frame to hold both the vertical button stack and the image
-        side_frame = tk.Frame(main_frame)
+        side_frame = tk.Frame(main_frame)              # new frame from parent frame
         side_frame.grid(row=1, column=0, sticky="w")   # anchor to left
         
         # sub-frame for vertical button stack
-        buttons_frame = tk.Frame(side_frame)
+        buttons_frame = tk.Frame(side_frame)           # new frame from parent frame
         buttons_frame.pack(side="left", anchor="n", padx=(0,5))  # small gap to image
         
         # create "Goal" button
         self.goal_button = tk.Button(
-            buttons_frame,                        # parent
-            text="Goal",                          # text on button
-            width=10,                             # button width
-            command=lambda: self.add_or_edit_entry("Goal") # action: open dialog
+            buttons_frame,                          # parent frame
+            text="Goal",                            # text shown on button
+            width=10,                               # button width
+            command=lambda: self.add_or_edit_entry("Goal") # on click action
         )
         self.goal_button.pack(pady=2, anchor="w") # pack with small vertical gap
         
         # create "Skill" button
         self.skill_button = tk.Button(
-            buttons_frame,
-            text="Skill",
-            width=10,
-            command=lambda: self.add_or_edit_entry("Skill")
+            buttons_frame,                          # parent frame
+            text="Skill",                           # text shown on button
+            width=10,                               # button width
+            command=lambda: self.add_or_edit_entry("Skill") # on click action
         )
-        self.skill_button.pack(pady=2, anchor="w")
+        self.skill_button.pack(pady=2, anchor="w") # pack with small vertical gap
         
         # create "Session" button
         self.session_button = tk.Button(
-            buttons_frame,
-            text="Session",
-            width=10,
-            command=lambda: self.add_or_edit_entry("Session")
+            buttons_frame,                          # parent frame
+            text="Session",                         # text shown on button
+            width=10,                               # button width
+            command=lambda: self.add_or_edit_entry("Session") # on click action
         )
-        self.session_button.pack(pady=2, anchor="w")
+        self.session_button.pack(pady=2, anchor="w") # pack with small vertical gap
         
         # create "Notes" button
         self.notes_button = tk.Button(
-            buttons_frame,
-            text="Notes",
-            width=10,
-            command=lambda: self.add_or_edit_entry("Notes")
+            buttons_frame,                          # parent frame
+            text="Notes",                           # text shown on button
+            width=10,                               # button width
+            command=lambda: self.add_or_edit_entry("Notes") # on click action
         )
-        self.notes_button.pack(pady=2, anchor="w")
+        self.notes_button.pack(pady=2, anchor="w") # pack with small vertical gap
 
-        # load image file (must be PNG or GIF for PhotoImage)
+        # load image file
         self.image = tk.PhotoImage(file="images\\image2_50pc.png")
         
         # create a label to display the image
         self.image_label = tk.Label(side_frame, image=self.image)
         
-        # place image to the right of the button stack
+        # place image next to the button stack
         self.image_label.pack(side="left", anchor="n")
         
         """ ----------------- BOTTOM ROW: TEXT BOX ----------------- """
         
         # frame to hold text box and scrollbar
-        output_frame = tk.Frame(main_frame)
-        output_frame.grid(row=2, column=0, sticky="ew", pady=10)  # stretch horizontally
+        output_frame = tk.Frame(main_frame) # new frame from parent frame
+        output_frame.grid(row=2, column=0, sticky="ew", pady=10) # stretch horizontally
         
         # vertical scrollbar widget
-        scrollbar = tk.Scrollbar(output_frame)
-        scrollbar.pack(side="right", fill="y")  # attach to right edge
+        scrollbar = tk.Scrollbar(output_frame) # new frame from parent frame
+        scrollbar.pack(side="right", fill="y") # attach to right edge
         
         # text widget for output (user entries)
         self.output_box = tk.Text(
@@ -184,38 +183,50 @@ class App:
     # custom popup input window
     def custom_input(self, title, prompt):
         # create a popup window
-        popup = tk.Toplevel(self.root)
-        popup.title(title)
+        popup = tk.Toplevel(self.root) # new frame from parent frame
+        popup.title(title) # title text
         popup.geometry("300x150")  # set popup size
 
         # label for prompt
-        label = tk.Label(popup, text=prompt, font=("Arial", 12))
-        label.pack(pady=10)
+        label = tk.Label(
+            popup,              # parent frame
+            text=prompt,        # displayed text
+            font=("Arial", 12)  # text font and size
+            )
+        label.pack(pady=10)     # display label
 
         # entry field for user input
-        entry = tk.Entry(popup, width=40)
-        entry.pack(pady=5)
+        entry = tk.Entry(
+            popup, # parent frame
+            width=40 # width of text entry
+            )
+        entry.pack(pady=5)      # display field
 
         # variable to store result
         result = {"value": None}
 
         # function when OK is pressed
         def on_ok():
-            result["value"] = entry.get()
+            result["value"] = entry.get() # get the text entry
             popup.destroy()  # close popup
 
         # ok button
-        ok_button = tk.Button(popup, text="OK", command=on_ok)
-        ok_button.pack(pady=10)
+        ok_button = tk.Button(
+            popup,          # parent frame
+            text="OK",      # button text
+            command=on_ok   # on click action
+            ) 
+        ok_button.pack(pady=10) # display button
 
         # wait until popup is closed
         self.root.wait_window(popup)
-
+        
+        # method returns the result
         return result["value"]
 
     # method to clear all entries from the tracker
     def clear_entries(self):
-        # reset all stored values back to empty strings
+        # loop to reset all stored values back to empty strings
         for key in self.entries:
             self.entries[key] = ""
         # refresh the output box to reflect cleared data
@@ -229,10 +240,10 @@ class App:
         self.output_box.config(state="normal")  
         # clear previous contents
         self.output_box.delete("1.0", tk.END)   
-        # iterate over saved entries and display them
+        # loop to iterate over saved entries and display them
         for key, value in self.entries.items():
             if value:
-                self.output_box.insert(tk.END, f"{key}: {value}\n")
+                self.output_box.insert(tk.END, f"{key}: {value}\n") # insert text value for specific key
         # set text box back to read-only
         self.output_box.config(state="disabled")  
 
