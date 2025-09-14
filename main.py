@@ -19,8 +19,9 @@ structure in their ongoing education.
 
 #imports from tkinter
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox # import messagebox
 
+# App class declaration
 class App:
     
     """
@@ -187,18 +188,18 @@ class App:
         popup = tk.Toplevel(self.root)
         popup.title(title)
 
-         # desired popup size
-        popup_width = 300
+         # desired popup width and height
+        popup_width = 300 
         popup_height = 150
 
         # make sure root window geometry info is current
         self.root.update_idletasks()
 
         # get main window position and size
-        main_x = self.root.winfo_x()
-        main_y = self.root.winfo_y()
-        main_width = self.root.winfo_width()
-        main_height = self.root.winfo_height()
+        main_x = self.root.winfo_x()    # main horizontal position
+        main_y = self.root.winfo_y()    # main vertical position
+        main_width = self.root.winfo_width()    # main width
+        main_height = self.root.winfo_height()  # main height
 
         # calculate popup position:
         # centered horizontally, quarter way down vertically
@@ -218,10 +219,10 @@ class App:
 
         # entry field for user input
         entry = tk.Entry(
-            popup, # parent frame
-            width=40 # width of text entry
+            popup,         # parent frame
+            width=40       # width of text entry
             )
-        entry.pack(pady=5)      # display field
+        entry.pack(pady=5) # display field
 
         # focus cursor immediately
         entry.focus_set()
@@ -232,7 +233,7 @@ class App:
         # function when OK is pressed
         def on_ok(event=None):
             result["value"] = entry.get() # get the text entry
-            popup.destroy()  # close popup
+            popup.destroy()               # close popup
 
         # ok button
         ok_button = tk.Button(
