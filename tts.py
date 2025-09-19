@@ -7,7 +7,7 @@ def speak(text_to_speak):
 
     converter_tts_engine = pyttsx3.init()
 
-    converter_tts_engine.setProperty('rate', 150)
+    converter_tts_engine.setProperty('rate', 70)
 
     converter_tts_engine.setProperty('volume', 0.7)
 
@@ -30,5 +30,4 @@ speak("""
 Give me your answer do
 I'm half crazy
 All for the love of you
-It won't be a stylish marriage
 """)
